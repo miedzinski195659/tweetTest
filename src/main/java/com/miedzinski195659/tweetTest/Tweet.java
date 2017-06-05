@@ -17,6 +17,10 @@ public class Tweet {
         this.content = content;
     }
 
+    public Tweet() {
+
+    }
+
     public long getId() {
         return id;
     }

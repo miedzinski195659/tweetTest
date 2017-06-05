@@ -2,10 +2,8 @@ package com.miedzinski195659.tweetTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,7 +11,6 @@ import java.util.List;
  * Created by lm on 10.05.2017.
  */
 @RestController
-@RequestMapping(value = "/tweet")
 public class TweetController {
 
     private final TweetService tweetService;
@@ -23,14 +20,15 @@ public class TweetController {
         this.tweetService = tweetService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/tweet", method = RequestMethod.GET)
     public List<Tweet> getAll() {
         return tweetService.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/tweet", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void addTweet(Tweet tweet) {
+    public void addTweet(@RequestBody Tweet tweet) {
         tweetService.save(tweet);
     }
+
 }
